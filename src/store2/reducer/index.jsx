@@ -7,21 +7,20 @@ const initial = {
 
 export default (state = initial, action) => {
 
-    console.log(state.users)
+    // console.log(state.users)
 
     console.log(action)
 
     switch (action.type) {
         case ("female"):
 
-            return {
+            const initial2 = {
                 users: [...state.users,
-                action.data]
-                        
+                action.payload]
+
             }
-            
-            
-           
+            console.log(initial2.users)
+            return initial2;
         default:
             console.log(state.users)
             return state;
@@ -31,3 +30,5 @@ export default (state = initial, action) => {
     // return state;
 
 }
+
+
