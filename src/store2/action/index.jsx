@@ -1,34 +1,35 @@
 
 
-
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
-import { auth } from  "../../config/firebase";
-import { signInWithPopup , GoogleAuthProvider , FacebookAuthProvider } from "firebase/auth";
-
+import React from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, database } from "../../config/firebase";
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+import { connect } from "react-redux";
 
 
 
 
 const fcreate = () => {
-    
-    var email = "mehdiraza2@yahoo.com"
-    var password = "kuch bhi"
-    
-createUserWithEmailAndPassword(auth, email, password)
 
-  .then((userCredential) => {
-    
-    
-    const user = userCredential.user;
-    console.log("account bangya" , user)
-    
-  })
-  .catch((error) => {
+  var email = "mehdiraza2@yahoo.com"
+  var password = "kuch bhi"
 
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log("Error ==> " , errorCode)
-     });
+  createUserWithEmailAndPassword(auth, email, password)
+
+    .then((userCredential) => {
+
+
+      const user = userCredential.user;
+      console.log("account bangya", user)
+
+    })
+    .catch((error) => {
+
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("Error ==> ", errorCode)
+    });
 
 
 }
@@ -36,14 +37,14 @@ createUserWithEmailAndPassword(auth, email, password)
 
 
 const flogin = () => {
-    var email = "mehdiraza1@yahoo.com"
-    var password = "kuch bhi"
+  var email = "mehdiraza1@yahoo.com"
+  var password = "kuch bhi"
 
-    signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-       
+
       const user = userCredential.user;
-      console.log("hogya login mubarak" , user);
+      console.log("hogya login mubarak", user);
 
 
     })
@@ -58,73 +59,120 @@ const flogin = () => {
 
 
 const set_data = (data) => {
-            return(dispatch) => {
-                dispatch ({ type     : "female" , payload : data })
-            }
+
+  return (dispatch) => {
+    console.log("idhr b arha hai");
+    dispatch({ type: "setuser", payload: data })
+  }
 }
 
-const google_login = () => {
 
+
+const google_login = (navigate) => {
+    
+  return (dispatch) => {
+    console.log("haan ab chalrha")
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-  
-    
-    const user = result.user;
-    console.log("hogya google login" , user) 
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    
-    
-    const email = error.email;
-    
-    
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    console.log("google login nae hua " , errorCode)
-  });
+
+      .then((result) => {
+
+        const user = result.user;
+
+        var user_data = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+          uid: user.uid
+        }
+
+        console.log("google login hogya ==> ", user_data)
+
+        writeUserData(user_data.uid, user_data.name, user_data.email, user_data.photo);
+        dispatch({ type: "setuser", payload: user_data })
+        navigate("/chat");
 
 
+
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        
+
+      })
+
+      .catch((error) => {
+
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+
+        const email = error.email;
+
+
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log("google login nae hua ", errorCode)
+      });
+
+  }
 }
 
-const facebook = () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-    console.log("facebook login bhi hogya ==> "  ,user)
-
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
+const facebook = (navigate) => {
 
 
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-    console.log("nae hoska facebook ==> " , errorCode)
 
-  
+  const provider = new FacebookAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+
+      const user = result.user;
+
+
+
+
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const accessToken = credential.accessToken;
+
+      navigate("/chat")
+      console.log("hogya facebook login =>", user);
+
+
+
+
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = FacebookAuthProvider.credentialFromError(error);
+      console.log("nae hoska facebook ==> ", errorCode)
+
+
+    });
+}
+
+
+
+
+function writeUserData(userId, name, email, imageUrl) {
+  const db = getDatabase();
+  set(ref(db, 'users/' + userId), {
+    username: name,
+    email: email,
+    profile_picture: imageUrl
   });
 }
 
 
 
 export {
-    set_data,
-    fcreate,
-    flogin,
-    google_login,
-    facebook
+  set_data,
+  fcreate,
+  flogin,
+  google_login,
+  facebook
+
 }

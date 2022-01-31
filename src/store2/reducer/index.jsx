@@ -1,34 +1,31 @@
 
 const initial = {
-    users: [{ name: "dev 1", age: 20 },
-    { name: "dev 2", age: 20 }]
+    users: [],
+    current_user: {}
 
 }
 
 export default (state = initial, action) => {
 
-    // console.log(state.users)
 
-    console.log(action)
+    console.log("pehle action me yeh tha", action)
+    console.log("pehle state me yeh tha", state)
 
     switch (action.type) {
-        case ("female"):
+        case ("setuser"):
 
             const initial2 = {
-                users: [...state.users,
-                action.payload]
+                users: [...state.users],
+                current_user: action.payload
+
 
             }
-            console.log(initial2.users)
+            console.log("change hone k baad ==> ", initial2)
             return initial2;
         default:
-            console.log(state.users)
+
             return state;
+
     }
 
-    // return ( [...state , {name : "cheking" , age : 2918}] ) ;
-    // return state;
-
 }
-
-
