@@ -4,8 +4,9 @@ import React from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, database } from "../../config/firebase";
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set , onValue ,get , child  } from "firebase/database";
 import { connect } from "react-redux";
+import { FirebaseError } from "firebase/app";
 
 
 
@@ -72,6 +73,7 @@ const google_login = (navigate) => {
     
   return (dispatch) => {
     console.log("haan ab chalrha")
+
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
@@ -117,6 +119,10 @@ const google_login = (navigate) => {
   }
 }
 
+
+
+
+
 const facebook = (navigate) => {
 
 
@@ -157,14 +163,67 @@ const facebook = (navigate) => {
 
 
 
-function writeUserData(userId, name, email, imageUrl) {
-  const db = getDatabase();
-  set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-    profile_picture: imageUrl
-  });
+
+
+const writeUserData = (userId, name, email, imageUrl) => {
+
+    const db = getDatabase();
+    
+
+    set(ref(db, 'users/' + userId), {
+      username: name,
+      email: email,
+      profile_picture : imageUrl,
+      uid : userId
+    });
+  }
+  
+
+
+const readfirebase = () => {
+  return(dispatch) => {
+
+
+// const dbRef = ref(getDatabase());
+// get(child(dbRef, `users`)).then((snapshot) => {
+//   if (snapshot.exists()) {
+//     console.log(snapshot.val()).;
+//   } else {
+//     console.log("No data available");
+//   }
+// }).catch((error) => {
+//   console.error(error);
+// });
+
+
+
+  
+let users = [];
+const db = getDatabase();
+const starCountRef = ref(db, 'users/');
+onValue(starCountRef, (snapshot) => {
+  
+  users.push(snapshot.val());
+  console.log(users[0]);
+  
+  
+});
+
+
+
+// dispatch({type : "friends" , payload : users})
 }
+
+
+}
+
+
+
+    
+        
+  
+
+
 
 
 
@@ -173,6 +232,8 @@ export {
   fcreate,
   flogin,
   google_login,
-  facebook
+  facebook,
+  writeUserData,
+  readfirebase
 
 }

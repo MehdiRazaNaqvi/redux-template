@@ -2,39 +2,49 @@
 import { useNavigate } from "react-router-dom"
 import { connect } from "react-redux";
 import "../App.css"
+import { readfirebase } from "../store2/action/index"
+import { useEffect } from "react";
+
 
 const Chat = (props) => {
     let navigate = useNavigate();
-    console.log(props.img)
+
+    useEffect( () => {
+        props.readfirebase();
+    } )
+  
+ 
 
     return (
-        
+    
         <div>
-            
-            <div className = "line">
-                <div className = "rounddiv">
-                <img src={props.img} alt="nae img arhi bhai" />
+
+            <div className="line">
+                <div className="rounddiv">
+                    <img src={props.img} alt="nae img arhi bhai" />
 
                 </div>
 
                 <h1>
-                    Chat Screen    
+                    Chat Screen
                 </h1>
 
-                <div className = "rounddiv">
-                        {/* <img src={props.img} alt="nae img arhi bhai" /> */}
-                        
+                <div className="rounddiv">
+                    {/* <img src={props.img} alt="nae img arhi bhai" /> */}
+
                 </div>
             </div >
             <hr />
             <h4>
                 Welcome {props.name}
             </h4>
-            
+
+                
 
             <button onClick={() => { navigate("/") }} >Log out</button> <br />
-            
-        
+
+
+
         </div>
 
     )
@@ -42,6 +52,15 @@ const Chat = (props) => {
 
 const mapStateToProps = (state) => ({
     name: state.current_user.name,
-    img: state.current_user.photo
+    img: state.current_user.photo,
+    users : state.users
+   
 })
-export default connect(mapStateToProps, null)(Chat)
+
+const mapDispatchToProps = (dispatch) => ({
+                readfirebase : () => dispatch(readfirebase())
+})
+
+
+
+export default connect( mapStateToProps , mapDispatchToProps )(Chat)

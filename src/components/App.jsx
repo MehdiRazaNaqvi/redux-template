@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
 // import { set_data } from "./store/action";
 import { chek, facebook, set_data } from "../store2/action/index";
-import { fcreate, flogin, google_login  } from "../store2/action/index";
+import {writeUserData, fcreate, flogin, google_login , readfirebase } from "../store2/action/index";
 import { Link } from "react-router-dom";
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 const App = (props) => {
 
 
-  const ku = { name: "kumail", age: 23 }
+  const ku = { name: "kumail", age: 23 , num:"maskd" , ad : "ww" }
+
   let navigate = useNavigate();
   return (
 
@@ -43,10 +45,10 @@ const App = (props) => {
 
 
 
-      
+      <button onClick={ () => writeUserData("jsdknc" , "BHUGU" , "uhbsdbc" , "hsakbckh")} >Write to firebase</button>
 
 
-
+        <button onClick={ () => readfirebase() }  >Read Firebase</button>
 
 
     </div>

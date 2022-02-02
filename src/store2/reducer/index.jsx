@@ -20,8 +20,24 @@ export default (state = initial, action) => {
 
 
             }
-            console.log("change hone k baad ==> ", initial2)
+            console.log("change hone k baad ==>" , initial2 );
             return initial2;
+            
+
+            
+
+        case ("friends"):
+
+            const initial3 = {
+                users: action.payload,
+                current_user: state.current_user
+
+
+            }
+
+            console.log("change hone k baad ==> ", initial3)
+            return initial3;
+
         default:
 
             return state;
