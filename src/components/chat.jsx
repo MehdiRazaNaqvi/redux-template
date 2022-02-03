@@ -3,25 +3,25 @@ import { useNavigate } from "react-router-dom"
 import { connect } from "react-redux";
 import "../App.css"
 import { readfirebase } from "../store2/action/index"
-import { useEffect } from "react";
+
+
 
 
 const Chat = (props) => {
     let navigate = useNavigate();
 
-    useEffect( () => {
-        props.readfirebase();
-    } )
-  
- 
+
+
+
 
     return (
-    
+
+
         <div>
 
             <div className="line">
                 <div className="rounddiv">
-                    <img src={props.img} alt="nae img arhi bhai" />
+                    <img src={props.img} alt="nae img arhi" />
 
                 </div>
 
@@ -30,7 +30,7 @@ const Chat = (props) => {
                 </h1>
 
                 <div className="rounddiv">
-                    {/* <img src={props.img} alt="nae img arhi bhai" /> */}
+                    {/* <img src={} alt="nae img arhi bhai" /> */}
 
                 </div>
             </div >
@@ -39,10 +39,19 @@ const Chat = (props) => {
                 Welcome {props.name}
             </h4>
 
-                
+            <button onClick={() => { props.readfirebase() }} >Read Firebase Data</button>
 
-            <button onClick={() => { navigate("/") }} >Log out</button> <br />
+            <button onClick={() => { navigate("/") }} >Log out</button>
 
+
+
+            <h3>Chat with our users :</h3>
+            <div className="f" >
+                <img src={props.users[0].profile_picture} alt="" />
+                <h6>{props.users[0].username}</h6>
+                <img src={props.users[1].profile_picture} alt="" />
+                <h6>{props.users[1].username}</h6>
+            </div>
 
 
         </div>
@@ -50,17 +59,18 @@ const Chat = (props) => {
     )
 }
 
+
 const mapStateToProps = (state) => ({
     name: state.current_user.name,
     img: state.current_user.photo,
-    users : state.users
-   
+    users: state.users
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
-                readfirebase : () => dispatch(readfirebase())
+    readfirebase: () => dispatch(readfirebase())
 })
 
 
 
-export default connect( mapStateToProps , mapDispatchToProps )(Chat)
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)

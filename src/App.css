@@ -1,41 +1,15 @@
 .App {
   text-align: center;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-image: url(./pics/undraw_texting_re_l11n.svg);
+  background-repeat: no-repeat;
+  background-size : 850px;
+     
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+ 
 
 
 .rounddiv {
@@ -43,28 +17,56 @@
   width: 60px;
   border-radius: 50%;
   background-color: rgb(213, 213, 213);
-  
+  border: 0.15rem solid rgb(55, 255, 65);
+  border-style: outset;
 
 
-}
+} 
+
 h1{
   font-size: 1rem;
 }
+
+
 .line{
   
   display:flex;
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
-  
+  margin: 7px;
 
-}
+} 
 
+ 
 img{
   height: 60px;
   width: 60px;
-  
   object-fit:contain;
   border-radius: 50%;
+ 
 
+} 
+
+hr{
+  width: 70%;
+}
+
+.mainpage{
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+}
+
+button{
+  width: 20%;
+  margin: 8px;
+  border: 0.09rem dashed grey;
+  
+}
+
+
+.f{
+  display: inline-flex;
 }

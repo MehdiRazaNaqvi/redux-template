@@ -5,8 +5,6 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { auth, database } from "../../config/firebase";
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { getDatabase, ref, set , onValue ,get , child  } from "firebase/database";
-import { connect } from "react-redux";
-import { FirebaseError } from "firebase/app";
 
 
 
@@ -94,6 +92,7 @@ const google_login = (navigate) => {
         writeUserData(user_data.uid, user_data.name, user_data.email, user_data.photo);
         dispatch({ type: "setuser", payload: user_data })
         navigate("/chat");
+       
 
 
 
@@ -185,9 +184,22 @@ const readfirebase = () => {
 
 
 // const dbRef = ref(getDatabase());
+
+
 // get(child(dbRef, `users`)).then((snapshot) => {
+
 //   if (snapshot.exists()) {
-//     console.log(snapshot.val()).;
+
+//     console.log(snapshot.val())
+//     let users = [];
+//     users.push (snapshot.val())
+    
+
+
+
+    
+
+
 //   } else {
 //     console.log("No data available");
 //   }
@@ -196,22 +208,22 @@ const readfirebase = () => {
 // });
 
 
-
-  
-let users = [];
 const db = getDatabase();
-const starCountRef = ref(db, 'users/');
+const starCountRef = ref(db, 'users');
 onValue(starCountRef, (snapshot) => {
-  
-  users.push(snapshot.val());
-  console.log(users[0]);
-  
-  
+  const data = snapshot.val();
+  console.log(data)
+  let updata = Object.values(data)
+  console.log(updata)
+  dispatch( {type : "friends" , payload : updata} )
+ 
 });
 
+  
+
+         
 
 
-// dispatch({type : "friends" , payload : users})
 }
 
 
@@ -220,8 +232,7 @@ onValue(starCountRef, (snapshot) => {
 
 
     
-        
-  
+   
 
 
 
