@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom"
 import { connect } from "react-redux";
-import "../App.css"
+import "../chat.css"
 import { readfirebase } from "../store2/action/index"
 
 
@@ -17,44 +17,57 @@ const Chat = (props) => {
     return (
 
 
-        <div>
+        <div className="div0" >
 
             <div className="line">
                 <div className="rounddiv">
-                    <img src={props.img} alt="nae img arhi" />
+                    <img className="roundimg" src={props.img} alt="nae img arhi" />
 
                 </div>
 
-                <h1>
+                <h2>
                     Chat Screen
-                </h1>
+                </h2>
 
                 <div className="rounddiv">
-                    {/* <img src={} alt="nae img arhi bhai" /> */}
+                    {/* <img className="roundimg" src={} alt="nae img arhi bhai" /> */}
 
                 </div>
             </div >
+
             <hr />
+
             <h4>
                 Welcome {props.name}
             </h4>
 
-            <button onClick={() => { props.readfirebase() }} >Read Firebase Data</button>
-
-            <button onClick={() => { navigate("/") }} >Log out</button>
-
-
 
             <h3>Chat with our users :</h3>
             <div className="f" >
-                <img src={props.users[0].profile_picture} alt="" />
+
+                
+                <img className="roundimg" src={props.users[0].profile_picture} alt="" />
                 <h6>{props.users[0].username}</h6>
-                <img src={props.users[1].profile_picture} alt="" />
-                <h6>{props.users[1].username}</h6>
+                <img className="roundimg" src={props.users[1].profile_picture} alt="" />
+                <h6>{props.users[1].username}</h6> 
             </div>
 
 
+            <div className="btn" >
+
+                <button onClick={() => { props.readfirebase() }} >Read Firebase Data</button>
+
+                <button onClick={() => { navigate("/") }} >Log out</button>
+            </div>
+
+
+           
+
+
+
+        
         </div>
+
 
     )
 }

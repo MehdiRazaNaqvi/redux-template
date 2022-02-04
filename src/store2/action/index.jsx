@@ -68,8 +68,9 @@ const set_data = (data) => {
 
 
 const google_login = (navigate) => {
-    
+  
   return (dispatch) => {
+    
     console.log("haan ab chalrha")
 
     const provider = new GoogleAuthProvider();
@@ -180,8 +181,10 @@ const writeUserData = (userId, name, email, imageUrl) => {
 
 
 const readfirebase = () => {
+  
   return(dispatch) => {
-
+    console.log("oakakakakakakkak")
+    
 
 // const dbRef = ref(getDatabase());
 

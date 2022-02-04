@@ -1,72 +1,70 @@
-.App {
-  text-align: center;
-  
-}
-
-body{
-  background-image: url(./pics/undraw_texting_re_l11n.svg);
-  background-repeat: no-repeat;
-  background-size : 850px;
-     
-}
- 
 
 
-.rounddiv {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  background-color: rgb(213, 213, 213);
-  border: 0.15rem solid rgb(55, 255, 65);
-  border-style: outset;
 
-
-} 
-
-h1{
-  font-size: 1rem;
+h4{
+ color: rgb(107, 159, 255);
+ font-size: 1.8rem;
+ font-weight: 400;
 }
 
 
-.line{
-  
-  display:flex;
-  justify-content: space-around;
-  flex-direction: row;
-  align-items: center;
-  margin: 7px;
+ h1{
+    font-size: 1.5rem;
+    padding-left: 15vw;
+ }
 
-} 
-
- 
-img{
-  height: 60px;
-  width: 60px;
-  object-fit:contain;
-  border-radius: 50%;
- 
-
-} 
 
 hr{
   width: 70%;
 }
-
+ 
 .mainpage{
+            width: 25%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
+            justify-content: center;
             align-items: center;
+            /* background-color: rgb(0, 138, 7); */
+            
+} 
+
+.mainpage2{
+  width:100%;
+  /* height: 100%; */
+  margin-right: 100px;
+  /* background-color:white ; */
+
 }
 
-button{
-  width: 20%;
-  margin: 8px;
-  border: 0.09rem dashed grey;
+
+
+.span0{
+  /* width: 100vw; */
+  height: 90vh;
+  display: flex;
+  padding-right: 100px;
+  padding-top: 0px;
+  /* background-color: red; */
+  
   
 }
 
 
-.f{
-  display: inline-flex;
+.svg{
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
 }
+
+
+button{
+  width: 20%;
+  margin: 8px;
+  border: none;
+  display: block;
+  width: 120px;
+  height: 60px;
+  
+}
+
