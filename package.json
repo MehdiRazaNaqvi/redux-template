@@ -1,6 +1,6 @@
 {
   "name": "chat",
-  "homepage": "https://MehdiRazaNaqvi.github.io/redux-template",
+  "homepage": "https://MehdiRazaNaqvi.github.io/chat-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

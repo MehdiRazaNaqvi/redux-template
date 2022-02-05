@@ -54,9 +54,6 @@ const Chat = (props) => {
 
 
             <div className="btn" >
-
-                <button onClick={() => { props.readfirebase() }} >Read Firebase Data</button>
-
                 <button onClick={() => { navigate("/") }} >Log out</button>
             </div>
 

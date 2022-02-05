@@ -46,7 +46,7 @@ const App = (props) => {
 
         <div className="mainpage" >
 
-          <h4>
+          <h4 className="welcome" >
             Welcome to chat club! Enjoy free texting to friends and family
           </h4>
 
@@ -55,16 +55,9 @@ const App = (props) => {
 
           {/* <button onClick={() => props.set_data(ku)} >Print</button> */}
 
-          <button onClick={() => props.google_login(navigate) } >Google Login</button>
-          <button onClick={() => facebook(navigate)} >Facebook Login</button>
+          <button onClick={() => {props.readfirebase() ; props.google_login(navigate) } } >Google Login</button>
+          {/* <button onClick={() => facebook(navigate)} >Facebook Login</button> */}
 
-
-
-
-          <button onClick={() => writeUserData("jsdknc", "BHUGU", "uhbsdbc", "hsakbckh")} >Write to firebase</button>
-
-
-          <button onClick={() => props.readfirebase()}  >Read Firebase</button>
         </div>
 
 
